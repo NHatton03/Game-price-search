@@ -1,6 +1,19 @@
 # Java CLI Game Price Lookup
 ## Project Planning Document
 
+
+## Running the project
+
+from inside the `gamesearch` directory.
+
+```bash
+# compile the project
+mvn compile exec:java -Dexec.mainClass="com.gamesearch.Main"
+
+# run the project
+mvn exec:java -Dexec.mainClass="com.gamesearch.Main"
+```
+
 ## Overview
 
 ### Goal
