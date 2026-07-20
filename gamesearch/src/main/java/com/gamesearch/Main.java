@@ -11,10 +11,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
 
-    private static final String API_KEY = "hWbNrlwHAhsrGFMszkmcYLbHtvNWkQS0";
+
+
     
 
     public static void main(String[] args) throws Exception {
+
+    String apiKey = System.getenv("API_KEY");
+
+    if(apiKey == null || apiKey.isEmpty()){
+        throw new IllegalStateException("API_KEY enviornment variable is not set");
+    }        
 
         String rawJsonString = """
                 {
@@ -35,7 +42,7 @@ public class Main {
         // System.out.println(root.toPrettyString());
 
         String url = String.format(
-            "https://api.gg.deals/v1/prices/by-steam-app-id/?ids=570940&key=%s&region=us",API_KEY
+            "https://api.gg.deals/v1/prices/by-steam-app-id/?ids=570940&key=%s&region=us",apiKey
         );
 
         HttpClient client = HttpClient.newBuilder()
