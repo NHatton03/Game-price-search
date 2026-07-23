@@ -24,7 +24,7 @@ public class SteamApi {
         client = HttpClient.newBuilder().build();
     }
 
-    public String getId(){
+    public void getId(){
         String url = String.format(
             "https://store.steampowered.com/api/storesearch/?term=%s&1=english&cc=US", keyword
         );
@@ -46,7 +46,7 @@ public class SteamApi {
                 for(JsonNode item : items){
                     String id = item.path("id").asText();
                     String name = item.path("name").asText();
-                    System.out.println(id + ": " + name);
+                    System.out.println(String.format("%s : %s", id, name));
                 }
             }else {
                 System.out.println("No entry found");
@@ -58,7 +58,7 @@ public class SteamApi {
 
         } catch (Exception e) {
         }   
-         return null;  
+          
     }
     
 }

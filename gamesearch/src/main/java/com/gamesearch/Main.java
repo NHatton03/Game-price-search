@@ -8,7 +8,7 @@ public class Main {
 
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi("Portal");
-    System.out.println(steam.getId());
+    steam.getId();
 
     GGDealsApi api = new GGDealsApi(apiKey);
     Optional<Game> game = api.getGame("1113550");
