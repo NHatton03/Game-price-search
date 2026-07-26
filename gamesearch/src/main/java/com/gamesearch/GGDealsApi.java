@@ -43,7 +43,7 @@ public class GGDealsApi {
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            return Optional.of(extractGameFromJson(response.body(), id));
+            return Optional.ofNullable(extractGameFromJson(response.body(), id));
         } catch (Exception e) {
             e.printStackTrace();
         }  
@@ -54,9 +54,15 @@ public class GGDealsApi {
         JsonNode root = mapper.readTree(responseBody);
         root = root.get("data");
         root = root.get(id);
-        String title = root.get("title").asText();
+
+        //System.out.println(root.toPrettyString());
+        JsonNode gameJson = root.get("title");
+        if(gameJson == null){
+            return null;
+        }
+        String title = gameJson.asText();
         root = root.get("prices");
-        String price = root.get("currentRetail").asText();
+        double price = root.get("currentRetail").asDouble();
         return new Game(title, price);
     }
 }

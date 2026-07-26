@@ -2,9 +2,9 @@ package com.gamesearch;
 
 public class Game {
     private final String name;
-    private final String price;
+    private final double price;
 
-    public Game(String name, String price){
+    public Game(String name, double price){
         this.name = name;
         this.price = price;
     }
@@ -13,7 +13,7 @@ public class Game {
         return name;
     }
 
-    public String getPrice(){
+    public double getPrice(){
         return price;
     }
 }

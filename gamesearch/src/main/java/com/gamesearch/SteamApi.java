@@ -1,64 +1,81 @@
 package com.gamesearch;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SteamApi {
 
-    private final String keyword;
+    
     private final HttpClient client;
 
     static ObjectMapper mapper = new ObjectMapper();
 
-    public SteamApi(String keyword){
-        if(keyword == null || keyword.isEmpty()){
-            throw new IllegalStateException("No keyword entered");
-        }
-        this.keyword = keyword;
+    public SteamApi(){
         client = HttpClient.newBuilder().build();
     }
 
-    public void getId(){
+    public Map<String, String> getId(String keyword){
+        if(keyword == null || keyword.isEmpty()){
+            throw new IllegalStateException("No keyword entered");
+        }
+        
+        Map<String, String> ids = new HashMap<>();
+        
         String url = String.format(
-            "https://store.steampowered.com/api/storesearch/?term=%s&1=english&cc=US", keyword
+            "https://store.steampowered.com/api/storesearch/?term=%s&1=english&cc=US&charset=utf-8", encodeValue(keyword)
         );
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .header("Accept", "application/json")
+                .header("Content-Type", "application/json; charset=UTF-8")
                 .timeout(Duration.ofSeconds(10))
                 .GET()
                 .build();
 
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
 
             JsonNode root = mapper.readTree(response.body());
-            
+
             JsonNode items = root.path("items");
             if(items.isArray() && items.size() > 0){
                 for(JsonNode item : items){
                     String id = item.path("id").asText();
                     String name = item.path("name").asText();
-                    System.out.println(String.format("%s : %s", id, name));
+                    
+                    ids.put(id, name);
                 }
-            }else {
-                System.out.println("No entry found");
-            }
-            
-            
-            
-              
+            }    
 
         } catch (Exception e) {
-        }   
+            e.printStackTrace();
+        } 
+        
+        return ids;
           
     }
+
+
+
+
+    private String encodeValue(String value) {
+    try {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+    } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
     
 }
