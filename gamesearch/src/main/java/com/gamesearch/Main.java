@@ -9,7 +9,7 @@ public class Main {
 
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi();
-    var map = steam.getId("Yakuza");
+    var map = steam.getId("The Expanse");
 
     GGDealsApi api = new GGDealsApi(apiKey);
     
@@ -23,7 +23,11 @@ public class Main {
     for (Map.Entry<String,String> pair: map.entrySet()){
         Optional<Game> game = api.getGame(pair.getKey());
         game.ifPresent((g) -> {
+            if(g.getPrice() == 0.0){
+                System.out.println(g.getName() + " " + g.getMessage());
+            }else {
             System.out.println(g.getName() + " " + g.getPrice());
+            }
         });
     }
     

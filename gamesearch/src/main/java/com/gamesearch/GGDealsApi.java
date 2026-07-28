@@ -63,6 +63,9 @@ public class GGDealsApi {
         String title = gameJson.asText();
         root = root.get("prices");
         double price = root.get("currentRetail").asDouble();
+        if(price == 0.0){
+            return new Game(title, "There is no price available");
+        }
         return new Game(title, price);
     }
 }
