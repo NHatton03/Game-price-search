@@ -1,7 +1,6 @@
 package com.gamesearch;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.Arrays;
 
 public class Main {
 
@@ -9,27 +8,23 @@ public class Main {
 
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi();
-    var map = steam.getId("The Expanse");
+    var map = steam.getId("Yakuza");
 
     GGDealsApi api = new GGDealsApi(apiKey);
-    
-    // game.ifPresentOrElse((g) -> {
-    //     System.out.println("Name: " + g.getName());
-    //     System.out.println("Price: " + g.getPrice());       
-    // }, () -> {
-    //     System.out.println("Entered game not valid.");
-    // });
 
-    for (Map.Entry<String,String> pair: map.entrySet()){
-        Optional<Game> game = api.getGame(pair.getKey());
-        game.ifPresent((g) -> {
-            if(g.getPrice() == 0.0){
-                System.out.println(g.getName() + " " + g.getMessage());
-            }else {
-            System.out.println(g.getName() + " " + g.getPrice());
-            }
-        });
+    String[] stringArray = Arrays.copyOf(map.keySet().toArray(), map.keySet().toArray().length, String[].class);
+    
+    var t = api.getGames(stringArray);
+    for(Game g : t){
+        System.out.println(g);
     }
+    
+    // for (Map.Entry<String,String> pair: map.entrySet()){
+    //     Optional<Game> game = api.getGame(pair.getKey());
+    //     game.ifPresent((g) -> {
+    //         System.out.println(g);
+    //     });
+    // }
     
     }
 }

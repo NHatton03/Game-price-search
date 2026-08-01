@@ -1,19 +1,21 @@
 package com.gamesearch;
 
-public class Game {
+public class Game implements Comparable<Game>{
     private final String name;
     private final double price;
-    private String message;
+    private final ReleaseStatus status;
+    
 
-    public Game(String name, String message){
-        this.price = 0;
-        this.name = name;
-        this.message = message;
-    }
+    // public Game(String name, ReleaseStatus status){
+    //     this.price = 0;
+    //     this.name = name;
+    //     this.status = status;
+    // }
 
-    public Game(String name, double price){
+    public Game(String name, double price, ReleaseStatus status){
         this.name = name;
         this.price = price;
+        this.status = status;
     }
 
     public String getName(){
@@ -24,7 +26,16 @@ public class Game {
         return price;
     }
 
-    public String getMessage(){
-        return message;
+    public ReleaseStatus getStatus(){
+        return status;
+    }
+
+    public String toString(){
+        return String.format("[%s] %s : %.2f ",status, name, price);
+    }
+
+    @Override
+    public int compareTo(Game o) {
+        return (int)(this.price - o.price);
     }
 }

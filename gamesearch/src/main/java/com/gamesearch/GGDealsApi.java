@@ -5,6 +5,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -62,10 +65,52 @@ public class GGDealsApi {
         }
         String title = gameJson.asText();
         root = root.get("prices");
-        double price = root.get("currentRetail").asDouble();
-        if(price == 0.0){
-            return new Game(title, "There is no price available");
+        String priceStr = root.get("currentRetail").asText();
+        if(priceStr == null || priceStr.equals("null")){
+            return new Game(title, 0, ReleaseStatus.Unreleased);
         }
-        return new Game(title, price);
+        double price = root.get("currentRetail").asDouble();    
+        return new Game(title, price, ReleaseStatus.Released);
+    }
+
+    public List<Game> getGames(String[] ids){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < ids.length; i++){
+            sb.append(ids[i]);
+            if(i+1 != ids.length){
+                sb.append(",");
+            }   
+        }
+        String url = String.format(
+            "https://api.gg.deals/v1/prices/by-steam-app-id/?ids=%s&key=%s&region=ie",sb.toString(), apiKey
+        );
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Accept", "application/json")
+                .timeout(Duration.ofSeconds(10))
+                .GET()
+                .build();
+                
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            ArrayList<Game> games = new ArrayList<>();
+
+            for(String id : ids){
+                var game = extractGameFromJson(response.body(), id);
+                if(game == null){
+                    continue;
+                }
+                games.add(game);
+            }
+
+            Collections.sort(games);
+
+            return games;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }  
+        return new ArrayList<>();
     }
 }
