@@ -1,14 +1,19 @@
 package com.gamesearch;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
+
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
 
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi();
-    var map = steam.getId("Yakuza");
+    buildMenu();
+    String keyWord = scanner.nextLine();
+    var map = steam.getId(keyWord);
 
     GGDealsApi api = new GGDealsApi(apiKey);
 
@@ -26,5 +31,14 @@ public class Main {
     //     });
     // }
     
+    }
+
+
+    public static void buildMenu(){
+        System.out.println("*********************************");
+        System.out.println("*\tGame Price Search\t*");
+        System.out.println("*\t\t\t\t*");
+        System.out.println("*********************************");
+        System.out.print("Enter a game name: ");
     }
 }

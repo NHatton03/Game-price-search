@@ -36,6 +36,6 @@ public class Game implements Comparable<Game>{
 
     @Override
     public int compareTo(Game o) {
-        return (int)(this.price - o.price);
+        return (int)(o.price - this.price);
     }
 }
