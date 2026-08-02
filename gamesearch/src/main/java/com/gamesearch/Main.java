@@ -9,6 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+    GOGApi gog = new GOGApi();
+    gog.getGameTitle("1207658691");    
+
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi();
     buildMenu();
