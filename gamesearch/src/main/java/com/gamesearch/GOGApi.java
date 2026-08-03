@@ -18,6 +18,31 @@ public class GOGApi {
         client = HttpClient.newBuilder().build();
     }
 
+    public Game buildGame(String id){
+        String title = getGameTitle(id);
+        double price = getGamePrice(id);
+        boolean isGameReleased = isGameReleased(id);
+        if (isGameReleased){
+            return new Game(title, price, ReleaseStatus.Released);
+        }
+        return new Game(title, price, ReleaseStatus.Unreleased);
+    }
+
+    public boolean isGameReleased(String id){
+        String url = String.format(
+            "https://api.gog.com/v2/games/%s?locale=en-US", id
+        );
+        try {            
+            JsonNode root = sendGet(url);
+            root = root.get("_embedded");
+            root = root.get("product");
+            boolean isAvailable = root.get("isAvailableForSale").asBoolean();
+            return isAvailable;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public String getGameTitle(String id){
         String url = String.format(
@@ -32,7 +57,7 @@ public class GOGApi {
             return title;
         }catch(Exception e){
             e.printStackTrace();
-    }
+        }
         return "";
 
     }

@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
     GOGApi gog = new GOGApi();
-    System.out.println(gog.getGamePrice("1207658691"));    
+    System.out.println(gog.buildGame("1193046833"));    
 
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi();
