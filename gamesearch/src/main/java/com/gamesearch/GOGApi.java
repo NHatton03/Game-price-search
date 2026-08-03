@@ -19,7 +19,7 @@ public class GOGApi {
     }
 
 
-    public void getGameTitle(String id){
+    public String getGameTitle(String id){
         String url = String.format(
             "https://api.gog.com/v2/games/%s?locale=en-US", id
         );
@@ -29,12 +29,38 @@ public class GOGApi {
             root = root.get("_embedded");
             root = root.get("product");
             String title = root.get("title").asText();
-            System.out.println(title);
+            return title;
         }catch(Exception e){
             e.printStackTrace();
     }
+        return "";
+
+    }
 
 
+    public double getGamePrice(String id){
+        
+        String url = String.format(
+            "https://api.gog.com/products/%s/prices?countryCode=IE&currency=EUR", id
+        );
+
+        try {
+            JsonNode root = sendGet(url);
+            root = root.get("_embedded");
+            JsonNode prices = root.path("prices");
+            if(prices.isArray() && prices.size() > 0){
+                for(JsonNode price : prices){
+                    String gamePriceStr = price.path("basePrice").asText();
+                    String numericPart = gamePriceStr.replaceAll("[^0-9]", "");
+                    double gamePrice = Integer.parseInt(numericPart) / 100.0;
+                    return gamePrice;
+                }
+            }  
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     private JsonNode sendGet(String url) throws Exception{
