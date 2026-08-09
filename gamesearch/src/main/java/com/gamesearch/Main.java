@@ -29,11 +29,19 @@ public class Main {
         System.out.println(g);
     }
     
-    System.out.println("Select game");
-    int selection = scanner.nextInt();
-    scanner.nextLine();
-    System.out.println(games.get(selection));
-    Game game = games.get(selection);
+    System.out.println("Select game: ");
+    String selectionstr = scanner.nextLine();
+    int selectionIdx = 0;
+    while(selectionIdx <= 0 || selectionIdx > games.size()){
+        try{
+            selectionIdx = Integer.parseInt(selectionstr);
+            System.out.println(games.get(selectionIdx - 1));
+        } catch (NumberFormatException | IndexOutOfBoundsException e){
+            System.out.println("Invalid Entry, Please try again: ");
+            selectionstr = scanner.nextLine();
+        }
+    }
+    Game game = games.get(selectionIdx - 1);
     if(game.getTime() == null){
         game.setTime(HowLongToBeat.getTime(game.getId()));
     }
