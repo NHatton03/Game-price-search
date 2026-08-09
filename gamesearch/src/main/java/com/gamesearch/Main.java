@@ -9,9 +9,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-    GOGApi gog = new GOGApi();
-    System.out.println(gog.buildGame("1193046833"));    
+    // GOGApi gog = new GOGApi();
+    // System.out.println(gog.buildGame("1193046833"));  
+    
 
+    HltbApi HowLongToBeat = new HltbApi();
     String apiKey = System.getenv("GG_API_KEY");
     SteamApi steam = new SteamApi();
     buildMenu();
@@ -22,18 +24,21 @@ public class Main {
 
     String[] stringArray = Arrays.copyOf(map.keySet().toArray(), map.keySet().toArray().length, String[].class);
     
-    var t = api.getGames(stringArray);
-    for(Game g : t){
+    var games = api.getGames(stringArray);
+    for(Game g : games){
         System.out.println(g);
     }
     
-    // for (Map.Entry<String,String> pair: map.entrySet()){
-    //     Optional<Game> game = api.getGame(pair.getKey());
-    //     game.ifPresent((g) -> {
-    //         System.out.println(g);
-    //     });
-    // }
-    
+    System.out.println("Select game");
+    int selection = scanner.nextInt();
+    scanner.nextLine();
+    System.out.println(games.get(selection));
+    Game game = games.get(selection);
+    if(game.getTime() == null){
+        game.setTime(HowLongToBeat.getTime(game.getId()));
+    }
+    System.out.printf("[Time to beat main story] %s", game.getTime());
+
     }
 
 

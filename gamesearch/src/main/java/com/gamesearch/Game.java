@@ -4,18 +4,17 @@ public class Game implements Comparable<Game>{
     private final String name;
     private final double price;
     private final ReleaseStatus status;
+    private String storyCompletionTime;
+    private final String steamId;
     
 
-    // public Game(String name, ReleaseStatus status){
-    //     this.price = 0;
-    //     this.name = name;
-    //     this.status = status;
-    // }
 
-    public Game(String name, double price, ReleaseStatus status){
+
+    public Game(String name, double price, ReleaseStatus status, String steamId){
         this.name = name;
         this.price = price;
         this.status = status;
+        this.steamId = steamId;
     }
 
     public String getName(){
@@ -30,8 +29,20 @@ public class Game implements Comparable<Game>{
         return status;
     }
 
+    public void setTime(String storyCompletionTime){
+        this.storyCompletionTime = storyCompletionTime;
+    }
+
+    public String getTime(){
+        return storyCompletionTime;
+    }
+
+    public String getId(){
+        return steamId;
+    }
+
     public String toString(){
-        return String.format("[%s] %s : %.2f ",status, name, price);
+        return String.format("[%s] %s : EUR %.2f ",status, name, price);
     }
 
     @Override
