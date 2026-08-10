@@ -68,10 +68,10 @@ public class GGDealsApi {
         root = root.get("prices");
         String priceStr = root.get("currentRetail").asText();
         if(priceStr == null || priceStr.equals("null")){
-            return new Game(title, 0, ReleaseStatus.Unreleased, id);
+            return new SteamGame(title, 0, ReleaseStatus.Unreleased, id);
         }
         double price = root.get("currentRetail").asDouble();    
-        return new Game(title, price, ReleaseStatus.Released, id);
+        return new SteamGame(title, price, ReleaseStatus.Released, id);
     }
 
     public List<Game> getGames(String[] ids){

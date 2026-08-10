@@ -23,9 +23,9 @@ public class GOGApi {
         double price = getGamePrice(id);
         boolean isGameReleased = isGameReleased(id);
         if (isGameReleased){
-            return new Game(title, price, ReleaseStatus.Released ,"Undefined");
+            return new GOGGame(title, price, ReleaseStatus.Released ,id);
         }
-        return new Game(title, price, ReleaseStatus.Unreleased ,"Undefined");
+        return new GOGGame(title, price, ReleaseStatus.Unreleased ,id);
     }
 
     public boolean isGameReleased(String id){

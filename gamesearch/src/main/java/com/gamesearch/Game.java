@@ -1,20 +1,20 @@
 package com.gamesearch;
 
-public class Game implements Comparable<Game>{
+public abstract class Game implements Comparable<Game>{
     private final String name;
     private final double price;
     private final ReleaseStatus status;
-    private String storyCompletionTime;
-    private final String steamId;
+    protected String storyCompletionTime;
+    private final String Id;
     
 
 
 
-    public Game(String name, double price, ReleaseStatus status, String steamId){
+    public Game(String name, double price, ReleaseStatus status, String Id){
         this.name = name;
         this.price = price;
         this.status = status;
-        this.steamId = steamId;
+        this.Id = Id;
     }
 
     public String getName(){
@@ -38,7 +38,7 @@ public class Game implements Comparable<Game>{
     }
 
     public String getId(){
-        return steamId;
+        return Id;
     }
 
     public String toString(){

@@ -7,10 +7,10 @@ public class Main {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
 
-    // GOGApi gog = new GOGApi();
-    // System.out.println(gog.buildGame("1193046833"));  
+     //GOGApi gog = new GOGApi();
+     //System.out.println(gog.buildGame("1193046833"));  
     
 
     HltbApi HowLongToBeat = new HltbApi();

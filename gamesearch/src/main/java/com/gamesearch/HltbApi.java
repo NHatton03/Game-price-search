@@ -55,8 +55,6 @@ public class HltbApi {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         
-
-        System.out.println(response.statusCode());
         //https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status#successful_responses
         if(response.statusCode() >= 200 && response.statusCode() <= 299){
             return Optional.ofNullable(mapper.readTree(response.body()));
