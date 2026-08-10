@@ -46,6 +46,7 @@ public class Main {
         game.setTime(HowLongToBeat.getTime(game.getId()));
     }
     System.out.printf("[Time to beat main story] %s", game.getTime());
+    
 
     }
 

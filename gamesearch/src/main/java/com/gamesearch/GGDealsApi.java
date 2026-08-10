@@ -17,7 +17,8 @@ public class GGDealsApi {
 
     private final String apiKey;
     private final HttpClient client;
-    
+
+    static SteamApi steam = new SteamApi();
     static ObjectMapper mapper = new ObjectMapper();
     public GGDealsApi(String apiKey){
         if(apiKey == null || apiKey.isEmpty()){
@@ -67,7 +68,7 @@ public class GGDealsApi {
         String title = gameJson.asText();
         root = root.get("prices");
         String priceStr = root.get("currentRetail").asText();
-        if(priceStr == null || priceStr.equals("null")){
+        if(priceStr == null || priceStr.equals("null") || steam.isUnrealeased(id)){
             return new SteamGame(title, 0, ReleaseStatus.Unreleased, id);
         }
         double price = root.get("currentRetail").asDouble();    

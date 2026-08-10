@@ -66,7 +66,34 @@ public class SteamApi {
           
     }
 
+    public boolean isUnrealeased(String id){
+        String url = String.format(
+            "https://store.steampowered.com/api/appdetails?appids=%s" ,id
+        );
 
+        HttpRequest request = HttpRequest.newBuilder()
+                            .uri(URI.create(url))
+                            .header("Content-Type", "application/json; charset=UTF-8")
+                            .timeout(Duration.ofSeconds(10))
+                            .GET()
+                            .build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+
+            JsonNode root = mapper.readTree(response.body());
+
+            root = root.get(id);
+            root = root.get("data");
+            root = root.get("release_date");
+            boolean comingSoon = root.get("coming_soon").asBoolean();
+            return comingSoon;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;                    
+    }
 
 
     private String encodeValue(String value) {
