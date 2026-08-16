@@ -76,15 +76,10 @@ public class GGDealsApi {
     }
 
     public List<Game> getGames(String[] ids){
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < ids.length; i++){
-            sb.append(ids[i]);
-            if(i+1 != ids.length){
-                sb.append(",");
-            }   
-        }
+        String idList = createIdsString(ids);
+
         String url = String.format(
-            "https://api.gg.deals/v1/prices/by-steam-app-id/?ids=%s&key=%s&region=ie",sb.toString(), apiKey
+            "https://api.gg.deals/v1/prices/by-steam-app-id/?ids=%s&key=%s&region=ie",idList, apiKey
         );
 
 
@@ -114,5 +109,17 @@ public class GGDealsApi {
             e.printStackTrace();
         }  
         return new ArrayList<>();
+    }
+
+
+    public String createIdsString(String[] ids){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < ids.length; i++){
+            sb.append(ids[i]);
+            if(i+1 != ids.length){
+                sb.append(",");
+            }   
+        }        
+        return sb.toString();
     }
 }
