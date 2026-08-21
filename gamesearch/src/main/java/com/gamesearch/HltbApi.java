@@ -45,7 +45,7 @@ public class HltbApi {
 
 
 
-    private Optional<JsonNode> sendGet(String url) throws Exception{
+    public Optional<JsonNode> sendGet(String url) throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Accept", "application/json")
