@@ -1,12 +1,14 @@
 package com.gamesearch;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
+@DisplayName("HltbApiTest")
 public class HltbApiTest {
 
 
@@ -32,7 +34,7 @@ public class HltbApiTest {
 
 
     @Test
-    public void getTime_validId_returnsMainStoryTime(){
+    public void getTime_validId_returnsMainStoryTime() throws Exception{
         //Arrange
         HltbApi api = new HltbApi();
         String validId = "1903340";
@@ -42,7 +44,7 @@ public class HltbApiTest {
     }
 
     @Test
-    public void getTime_invalidId_returnsUndefined(){
+    public void getTime_invalidId_returnsUndefined() throws Exception{
         //Arrange
         HltbApi api = new HltbApi();
         String invalidId = "xx";

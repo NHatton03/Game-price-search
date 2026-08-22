@@ -1,0 +1,179 @@
+{
+  "total": 10,
+  "items": [
+    {
+      "type": "app",
+      "name": "Tom Clancy's Rainbow Six Siege",
+      "id": 359550,
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/c1bbd10ec5e3d5a0b285935b9dd847e7e4483376/capsule_231x87_alt_assets_24.jpg?t=1786117431",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false,
+      "controller_support": "full"
+    },
+    {
+      "type": "app",
+      "name": "Counter-Strike 2",
+      "id": 730,
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_231x87.jpg?t=1784564069",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": true
+      },
+      "streamingvideo": false
+    },
+    {
+      "type": "app",
+      "name": "Marvel's Spider-Man 2",
+      "id": 2651280,
+      "price": {
+        "currency": "USD",
+        "initial": 5999,
+        "final": 5999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2651280/379bd114fe5c23850555d1eb67fa8ac996bf702b/capsule_231x87.jpg?t=1763569811",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false,
+      "controller_support": "full"
+    },
+    {
+      "type": "app",
+      "name": "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+      "id": 1643320,
+      "price": {
+        "currency": "USD",
+        "initial": 5999,
+        "final": 4199
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1643320/b35bb511b9e89fbec26b7fa0a83e6fcf840cca4d/capsule_231x87_alt_assets_7.jpg?t=1787314871",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false
+    },
+    {
+      "type": "app",
+      "name": "Mortal Shell II",
+      "id": 2584270,
+      "price": {
+        "currency": "USD",
+        "initial": 4999,
+        "final": 4999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2584270/be45d87c9974a36f690480bceb01f03987a0c23a/capsule_231x87.jpg?t=1787326472",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false,
+      "controller_support": "full"
+    },
+    {
+      "type": "app",
+      "name": "STAR WARS Zero Company™",
+      "id": 2075800,
+      "price": {
+        "currency": "USD",
+        "initial": 4999,
+        "final": 4999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2075800/56484e8832119b4b37b3fa3a6a5ec23209cd835c/capsule_231x87.jpg?t=1787045473",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false
+    },
+    {
+      "type": "app",
+      "name": "Marvel’s Spider-Man Remastered",
+      "id": 1817070,
+      "price": {
+        "currency": "USD",
+        "initial": 5999,
+        "final": 5999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/capsule_231x87.jpg?t=1763569047",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false
+    },
+    {
+      "type": "app",
+      "name": "Forza Horizon 6",
+      "id": 2483190,
+      "price": {
+        "currency": "USD",
+        "initial": 6999,
+        "final": 6999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2483190/efa5dfac82e658e18e16e508639dfae2284d88ab/capsule_231x87_alt_assets_3.jpg?t=1786467254",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false,
+      "controller_support": "full"
+    },
+    {
+      "type": "app",
+      "name": "Shift At Midnight",
+      "id": 3722330,
+      "price": {
+        "currency": "USD",
+        "initial": 999,
+        "final": 999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3722330/19c9e6ec567f975b0b4462b8c84c1a38c74adf0d/capsule_231x87.jpg?t=1787088182",
+      "metascore": "",
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "streamingvideo": false
+    },
+    {
+      "type": "app",
+      "name": "The Elder Scrolls® Online",
+      "id": 306130,
+      "price": {
+        "currency": "USD",
+        "initial": 1999,
+        "final": 1999
+      },
+      "tiny_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/306130/b70c25a51268b6ae7200c16136abfc35c4263833/capsule_231x87.jpg?t=1783621796",
+      "metascore": "80",
+      "platforms": {
+        "windows": true,
+        "mac": true,
+        "linux": false
+      },
+      "streamingvideo": false
+    }
+  ]
+}

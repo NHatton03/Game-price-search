@@ -20,12 +20,12 @@ public class HltbApi {
         client = HttpClient.newBuilder().build();
     }
 
-    public String getTime(String id){
+    public String getTime(String id) throws Exception{
         String url = String.format(
             "https://hltbapi.codepotatoes.de/steam/%s", id
         );
 
-        try{
+      //  try{
             Optional<JsonNode> optRoot = sendGet(url);
             if(optRoot.isPresent()){
             String mainStoryTime = optRoot.get().get("mainStory").asText();
@@ -35,9 +35,9 @@ public class HltbApi {
             return mainStoryTime;
             }
             
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+    //    } catch(Exception e){
+      //      e.printStackTrace();
+        //}
 
         return "Undefined";
     }

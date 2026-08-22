@@ -43,7 +43,11 @@ public class Main {
     }
     Game game = games.get(selectionIdx - 1);
     if(game.getTime() == null){
-        game.setTime(HowLongToBeat.getTime(game.getId()));
+        try {
+            game.setTime(HowLongToBeat.getTime(game.getId()));
+        } catch (Exception ex) {
+           ex.printStackTrace();
+        }
     }
     System.out.printf("[Time to beat main story] %s", game.getTime());
     

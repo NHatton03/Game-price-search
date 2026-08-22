@@ -31,7 +31,7 @@ public class SteamApi {
         }
         
         Map<String, String> ids = new HashMap<>();
-        
+
         String url = String.format(
             "https://store.steampowered.com/api/storesearch/?term=%s&1=english&cc=US&charset=utf-8", encodeValue(keyword)
         );
@@ -48,15 +48,7 @@ public class SteamApi {
 
             JsonNode root = mapper.readTree(response.body());
 
-            JsonNode items = root.path("items");
-            if(items.isArray() && items.size() > 0){
-                for(JsonNode item : items){
-                    String id = item.path("id").asText();
-                    String name = item.path("name").asText();
-                    
-                    ids.put(id, name);
-                }
-            }    
+            ids = buildIdMap(root);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,6 +56,20 @@ public class SteamApi {
         
         return ids;
           
+    }
+
+    public Map<String, String> buildIdMap(JsonNode root){
+        Map<String, String> ids = new HashMap<>();
+        JsonNode items = root.path("items");
+            if(items.isArray() && items.size() > 0){
+                for(JsonNode item : items){
+                    String id = item.path("id").asText();
+                    String name = item.path("name").asText();
+                    
+                    ids.put(id, name);
+                }
+            }
+        return ids;        
     }
 
     public boolean isUnrealeased(String id){

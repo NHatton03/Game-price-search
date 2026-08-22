@@ -1,13 +1,13 @@
 package com.gamesearch;
 import java.util.stream.Stream;
+
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runners.Parameterized;
 
+@DisplayName("StringTest")
 public class StringTest {
 
     static Stream<Arguments>provideTestCases(){
