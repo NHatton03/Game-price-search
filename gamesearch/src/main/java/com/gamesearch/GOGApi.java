@@ -1,10 +1,8 @@
 package com.gamesearch;
 
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,10 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GOGApi {
     
     private final HttpClient client;
+    private final JsonRequestBuilder jsonRequestBuilder;
 
     static ObjectMapper mapper = new ObjectMapper();
     public GOGApi(){
         client = HttpClient.newBuilder().build();
+        jsonRequestBuilder = new JsonRequestBuilder();
     }
 
     public Game buildGame(String id){
@@ -89,17 +89,11 @@ public class GOGApi {
     }
 
     private JsonNode sendGet(String url) throws Exception{
-        HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Accept", "application/json")
-                    .timeout(Duration.ofSeconds(10))
-                    .GET()
-                    .build();
+        HttpRequest request = jsonRequestBuilder.buildRequest(url);
 
-                    
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            return mapper.readTree(response.body());
+        return mapper.readTree(response.body());
     }
 
 }

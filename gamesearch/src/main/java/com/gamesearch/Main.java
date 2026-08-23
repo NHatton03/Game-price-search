@@ -29,6 +29,7 @@ public class Main {
         System.out.println(g);
     }
     
+    
     System.out.println("Select game: ");
     String selectionstr = scanner.nextLine();
     int selectionIdx = 0;

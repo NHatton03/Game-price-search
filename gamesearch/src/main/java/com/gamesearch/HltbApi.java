@@ -1,10 +1,8 @@
 package com.gamesearch;
 
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,10 +12,12 @@ public class HltbApi {
     
 
     private final HttpClient client;
+    private final JsonRequestBuilder jsonRequestBuilder;
     static ObjectMapper mapper = new ObjectMapper();
 
     public HltbApi(){
         client = HttpClient.newBuilder().build();
+        jsonRequestBuilder = new JsonRequestBuilder();
     }
 
     public String getTime(String id) throws Exception{
@@ -25,7 +25,6 @@ public class HltbApi {
             "https://hltbapi.codepotatoes.de/steam/%s", id
         );
 
-      //  try{
             Optional<JsonNode> optRoot = sendGet(url);
             if(optRoot.isPresent()){
             String mainStoryTime = optRoot.get().get("mainStory").asText();
@@ -34,10 +33,7 @@ public class HltbApi {
             }
             return mainStoryTime;
             }
-            
-    //    } catch(Exception e){
-      //      e.printStackTrace();
-        //}
+
 
         return "Undefined";
     }
@@ -46,12 +42,7 @@ public class HltbApi {
 
 
     public Optional<JsonNode> sendGet(String url) throws Exception{
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Accept", "application/json")
-                .timeout(Duration.ofSeconds(10))
-                .GET()
-                .build();
+        HttpRequest request = jsonRequestBuilder.buildRequest(url);
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         

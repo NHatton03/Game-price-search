@@ -1,10 +1,8 @@
 package com.gamesearch;
 
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +15,7 @@ public class GGDealsApi {
 
     private final String apiKey;
     private final HttpClient client;
+    private final JsonRequestBuilder jsonRequestBuilder;
 
     static SteamApi steam = new SteamApi();
     static ObjectMapper mapper = new ObjectMapper();
@@ -25,6 +24,7 @@ public class GGDealsApi {
         throw new IllegalStateException("Invalid API key");
     }    
         this.apiKey = apiKey;
+        jsonRequestBuilder = new JsonRequestBuilder();
         client = HttpClient.newBuilder().build();
     }
 
@@ -37,12 +37,7 @@ public class GGDealsApi {
         );
 
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Accept", "application/json")
-                .timeout(Duration.ofSeconds(10))
-                .GET()
-                .build();
+        HttpRequest request = jsonRequestBuilder.buildRequest(url);
                 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -83,12 +78,7 @@ public class GGDealsApi {
         );
 
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Accept", "application/json")
-                .timeout(Duration.ofSeconds(10))
-                .GET()
-                .build();
+        HttpRequest request = jsonRequestBuilder.buildRequest(url);
                 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
