@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -22,6 +23,10 @@ public class SteamApiTest {
         return mapper.readTree(Files.readString(Paths.get("src", "main", "resources", "ValidJson.json")));
     }
 
+    public static JsonNode getInvalidTestData() throws IOException{
+     return mapper.readTree(Files.readString(Paths.get("src", "main", "resources", "InvalidJson.json")));   
+    }
+
     @Test
     public void buildIdMap_validJsonNode_PopulatedIdMap() throws IOException{
         //Arrange
@@ -32,4 +37,30 @@ public class SteamApiTest {
         //Assert
         assertEquals(10, result.size());
     }
+
+    @Test
+    public void buildIdMap_InvalidJsonNode_EmptyIdMap() throws IOException{
+        //Arrange
+        SteamApi api = new SteamApi();
+        JsonNode root = getInvalidTestData();
+        //Act
+        Map<String, String> result = api.buildIdMap(root);
+        //Assert
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void isUnreleased_ValidId_False() throws IOException{
+        //Arrange
+        SteamApi api = new SteamApi();
+        String validId = "400";
+        //Act
+        Boolean result = api.isUnrealeased(validId);
+        //Assert
+        assertFalse(result);
+    }
+
+    
+
+
 }
