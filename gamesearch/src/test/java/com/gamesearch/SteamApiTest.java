@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -57,6 +57,17 @@ public class SteamApiTest {
         //Act
         Boolean result = api.isUnrealeased(validId);
         //Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void isUnreleased_InvalidId_False() throws IOException{
+        //Arrange
+        SteamApi api = new SteamApi();
+        String InvalidId = "xx";
+        //Act
+        Boolean result = api.isUnrealeased(InvalidId);
+        //
         assertFalse(result);
     }
 
